@@ -14,7 +14,6 @@ class Category {
   static List<Category> fromJsonToCategories(Map<String, dynamic> jsonData) {
     final List<Category> categories = [];
     for (final entry in jsonData['categories']) {
-      print(entry['idCategory'].runtimeType);
       categories.add(
         Category(
           idCategory: int.parse(entry['idCategory']),

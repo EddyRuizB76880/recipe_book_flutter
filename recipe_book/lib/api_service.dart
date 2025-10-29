@@ -22,7 +22,7 @@ class ApiService {
 
   getMealsByCategory (String category) async {
     final response = await _dio.get('https://www.themealdb.com/api/json/v1/1/filter.php?c=$category');
-    return response;
+    return jsonDecode(response.toString());;
   }
 
   getMealsByArea(){}

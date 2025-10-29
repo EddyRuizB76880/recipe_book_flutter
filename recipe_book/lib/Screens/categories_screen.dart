@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_book/Models/category.dart';
-import 'package:recipe_book/Widgets/category_row.dart';
+import 'package:recipe_book/Widgets/category_item.dart';
 import 'package:recipe_book/api_service.dart';
 
 class CategoriesScreen extends StatefulWidget {
@@ -30,9 +30,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: FutureBuilder(
+    return FutureBuilder(
           future: categories,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -47,14 +45,33 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               return const Center(child: Text('No categories available.'));
             }
 
-            return ListView.builder(
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) =>
-                  CategoryRow(category: snapshot.data![index]),
+            return Padding(
+              padding: const EdgeInsets.only(top: 40),
+              child: Column(
+                children: [
+                  Text(
+                    'Categories',
+                    style: TextStyle(color: Colors.black, fontSize: 20),
+                  ),
+                  Expanded(
+                    child: GridView(
+                      padding: EdgeInsets.all(24),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 3 / 2,
+                        crossAxisSpacing: 30,
+                        mainAxisSpacing: 30,
+                      ),
+                      children: [
+                        for (final category in snapshot.data!)
+                          CategoryItem(category: category),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             );
           },
-        ),
-      ),
-    );
+        );
   }
 }
