@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_book/Models/category.dart';
+import 'package:recipe_book/Screens/meal_list_screen.dart';
 
 class CategoryItem extends StatelessWidget {
   const CategoryItem({super.key, required this.category});
   final Category category;
+  _loadCategoryMeals(BuildContext context) {
+        print('Category ${category.strCategory} was clicked.');
 
+        Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> MealListScreen(category: category)));
+      }
   @override
   Widget build(context) {
     return InkWell(
       splashColor: Theme.of(context).primaryColor,
-      onTap: () {
-        print('Category ${category.strCategory} was clicked.');
+      onTap: (){
+        _loadCategoryMeals(context);
       },
       borderRadius: BorderRadius.circular(16),
       child: Container(
