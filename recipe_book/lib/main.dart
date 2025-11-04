@@ -17,19 +17,13 @@ class MyApp extends StatelessWidget {
 
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color.fromARGB(206, 243, 130, 2),
+          seedColor: const Color.fromARGB(206, 243, 62, 2),
         ),
       ),
       home: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'My Recipe Book!',
-            style: TextStyle(color: Theme.of(context).scaffoldBackgroundColor),
-          ),
-          backgroundColor: Theme.of(context).primaryColor,
-        ),
+        
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        body: SafeArea(child: CategoriesScreen()),
+        body: CategoriesScreen(),
       ),
     );
   }

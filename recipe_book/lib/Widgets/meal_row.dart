@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_book/Models/category.dart';
 import 'package:recipe_book/Models/meal_row_data.dart';
+import 'package:recipe_book/Screens/meal_details_screen.dart';
 
 class MealRow extends StatelessWidget {
   const MealRow({super.key, required this.mealRowData});
@@ -11,7 +12,8 @@ class MealRow extends StatelessWidget {
     return InkWell(
       splashColor: Theme.of(context).primaryColor,
       onTap: () {
-        print('Meal ${mealRowData.strMeal} was clicked.');
+        print('Meal ${mealRowData.idMeal} was clicked.');
+        Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => MealDetailsScreen(idMeal: mealRowData.idMeal,)));
       },
       borderRadius: BorderRadius.circular(16),
       child: Container(

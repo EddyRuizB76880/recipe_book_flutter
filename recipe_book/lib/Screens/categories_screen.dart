@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_book/Models/category.dart';
+import 'package:recipe_book/Widgets/app_bar.dart';
 import 'package:recipe_book/Widgets/category_item.dart';
 import 'package:recipe_book/api_service.dart';
 
@@ -45,30 +46,36 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               return const Center(child: Text('No categories available.'));
             }
 
-            return Padding(
-              padding: const EdgeInsets.only(top: 40),
-              child: Column(
-                children: [
-                  Text(
-                    'Categories',
-                    style: TextStyle(color: Colors.black, fontSize: 20),
-                  ),
-                  Expanded(
-                    child: GridView(
-                      padding: EdgeInsets.all(24),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 3 / 2,
-                        crossAxisSpacing: 30,
-                        mainAxisSpacing: 30,
+            return Scaffold(
+              
+              appBar: RecipeBookAppBar(),
+              body: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 40),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Categories',
+                        style: TextStyle(color: Colors.black, fontSize: 20),
                       ),
-                      children: [
-                        for (final category in snapshot.data!)
-                          CategoryItem(category: category),
-                      ],
-                    ),
+                      Expanded(
+                        child: GridView(
+                          padding: EdgeInsets.all(24),
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 3 / 2,
+                            crossAxisSpacing: 30,
+                            mainAxisSpacing: 30,
+                          ),
+                          children: [
+                            for (final category in snapshot.data!)
+                              CategoryItem(category: category),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             );
           },
