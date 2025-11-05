@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class RecipeBookAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const RecipeBookAppBar({super.key});
+  RecipeBookAppBar({super.key, this.title = 'My recipe book!'});
+
+  String title;
 
   @override
   Size get preferredSize => Size.fromHeight(AppBar().preferredSize.height);
@@ -10,7 +12,7 @@ class RecipeBookAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(context) {
     return AppBar(
       title: Text(
-        'My Recipe Book!',
+        title,
         style: TextStyle(color: Theme.of(context).scaffoldBackgroundColor),
       ),
       backgroundColor: Theme.of(context).primaryColor,
