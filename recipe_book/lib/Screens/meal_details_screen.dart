@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_book/Widgets/app_bar.dart';
+import 'package:recipe_book/Widgets/pill.dart';
 import 'package:recipe_book/api_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -47,7 +48,7 @@ class _MealDetailsStateScreen extends State<MealDetailsScreen> {
         child: Column(
           children: [
             Image.network(
-              mealDetails['strMealThumb'],
+              mealDetails['strMealThumb'] ?? 'https://cdn-icons-png.freepik.com/512/1046/1046874.png',
               fit: BoxFit.cover,
               height: 200,
               width: double.infinity,
@@ -59,50 +60,8 @@ class _MealDetailsStateScreen extends State<MealDetailsScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
-                    width: 96,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16.0),
-                      gradient: LinearGradient(
-                        colors: [
-                          Theme.of(context).primaryColor.withAlpha(190),
-                          Theme.of(context).primaryColor,
-                        ],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                    ),
-                    child: Text(
-                      mealDetails['strCategory'],
-                      style: TextStyle(
-                        color: Theme.of(context).secondaryHeaderColor,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  Container(
-                    width: 96,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16.0),
-                      gradient: LinearGradient(
-                        colors: [
-                          Theme.of(context).primaryColor.withAlpha(190),
-                          Theme.of(context).primaryColor,
-                        ],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                    ),
-                    child: Text(
-                      mealDetails['strArea'],
-                      style: TextStyle(
-                        color: Theme.of(context).secondaryHeaderColor,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
+                  Pill(text: mealDetails['strArea']),
+                  Pill(text: mealDetails['strCategory']),
                 ],
               ),
             ),

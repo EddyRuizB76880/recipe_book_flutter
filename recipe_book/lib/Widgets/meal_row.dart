@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_book/Models/category.dart';
 import 'package:recipe_book/Models/meal_row_data.dart';
 import 'package:recipe_book/Screens/meal_details_screen.dart';
 
@@ -24,12 +23,12 @@ class MealRow extends StatelessWidget {
           alignment: AlignmentGeometry.bottomCenter,
           key: ValueKey(mealRowData.idMeal),
           children: [
-            Image.network(
-              mealRowData.strMealThumb,
-              width: double.infinity,
-              height: 150,
-              fit: BoxFit.cover,
-            ),
+              Image.network(
+                mealRowData.strMealThumb ?? 'https://cdn-icons-png.freepik.com/512/1046/1046874.png',
+                width: double.infinity,
+                height: 150,
+                fit: BoxFit.cover,
+              ),
             Container(
               decoration: BoxDecoration(color: Color.fromARGB(113, 0, 0, 0)),
               height: 30,

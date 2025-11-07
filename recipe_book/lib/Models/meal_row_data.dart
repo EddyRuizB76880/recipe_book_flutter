@@ -1,11 +1,11 @@
 class MealRowData {
   MealRowData({
     required this.strMeal,
-    required this.strMealThumb,
+    this.strMealThumb,
     required this.idMeal,
   });
   final String strMeal;
-  final String strMealThumb;
+  final String? strMealThumb;
   final int idMeal;
 
   static List<MealRowData> fromJsonToMealList(Map<String, dynamic> jsonData){
@@ -20,7 +20,6 @@ class MealRowData {
         ),
       );
     }
-    print('returnung');
     return meals;
   }
 }
