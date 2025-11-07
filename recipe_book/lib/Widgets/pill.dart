@@ -8,8 +8,7 @@ class Pill extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
    return  Container(
-                    width: 96,
-                    height: 30,
+                    padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16.0),
                       gradient: LinearGradient(

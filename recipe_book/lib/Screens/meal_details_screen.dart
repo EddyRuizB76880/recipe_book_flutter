@@ -54,7 +54,7 @@ class _MealDetailsStateScreen extends State<MealDetailsScreen> {
               width: double.infinity,
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 12.0),
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
               child: Row(
                 spacing: 20,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -65,12 +65,15 @@ class _MealDetailsStateScreen extends State<MealDetailsScreen> {
                 ],
               ),
             ),
-            if (mealDetails['strSource'].length > 1)
-              TextButton(
-                onPressed: () async {
-                  await launchUrl(Uri.parse(mealDetails['strSource']));
-                },
-                child: Text('Recipe taken from ${mealDetails['strSource']}'),
+            if (mealDetails['strSource'] != null && mealDetails['strSource'].length > 1)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10.0),
+                child: TextButton(
+                  onPressed: () async {
+                    await launchUrl(Uri.parse(mealDetails['strSource']));
+                  },
+                  child: Pill(text: 'Tap here to see the source.',),
+                ),
               ),
             Text(
               'Ingredients',
@@ -81,7 +84,7 @@ class _MealDetailsStateScreen extends State<MealDetailsScreen> {
               textAlign: TextAlign.center,
             ),
             for (var index = 1; index <= 20; index++)
-              if (mealDetails['strMeasure$index'].length > 1)
+              if (mealDetails['strMeasure$index'] != null && mealDetails['strMeasure$index'].length > 1)
                 Text(
                   '${mealDetails['strMeasure$index']} ${mealDetails['strIngredient$index']}',
                   textAlign: TextAlign.center,
