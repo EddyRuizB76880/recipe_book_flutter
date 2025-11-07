@@ -106,4 +106,14 @@ class MealDetails {
     String? strImageSource;
     String? strCreativeCommonsConfirmed;
     String? dateModified; 
+
+      static MealDetails fromJsonToMealDetails(Map<String, dynamic> jsonData){
+      print(jsonData.entries);
+      print(jsonData.values);
+      final mealDetails = MealDetails();
+
+      
+      
+      return mealDetails;
+    }
 }
