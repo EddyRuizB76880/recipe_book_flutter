@@ -13,6 +13,7 @@ class CategoryItem extends StatelessWidget {
   @override
   Widget build(context) {
     return InkWell(
+      key: ValueKey(category.idCategory),
       splashColor: Theme.of(context).primaryColor,
       onTap: (){
         _loadCategoryMeals(context);

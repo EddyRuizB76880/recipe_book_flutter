@@ -48,20 +48,20 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
             return Scaffold(
               
-              appBar: RecipeBookAppBar(),
+              appBar: const RecipeBookAppBar(),
               body: SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 40),
                   child: Column(
                     children: [
-                      Text(
+                      const Text(
                         'Categories',
                         style: TextStyle(color: Colors.black, fontSize: 20),
                       ),
                       Expanded(
                         child: GridView(
-                          padding: EdgeInsets.all(24),
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          padding:const EdgeInsets.all(24),
+                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                             childAspectRatio: 3 / 2,
                             crossAxisSpacing: 30,

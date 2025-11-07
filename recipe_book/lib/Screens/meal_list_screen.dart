@@ -42,7 +42,7 @@ class _MealListScreenState extends State<MealListScreen> {
       future: meals,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Scaffold(body: const Center(child: CircularProgressIndicator()));
+          return const Scaffold(body: Center(child: CircularProgressIndicator()));
         }
 
         if (snapshot.hasError) {
@@ -54,7 +54,7 @@ class _MealListScreenState extends State<MealListScreen> {
         }
         //Todo
         return Scaffold(
-          appBar: RecipeBookAppBar(),
+          appBar: const RecipeBookAppBar(),
           body: SafeArea(
             child: Padding(
               padding: const EdgeInsets.only(top: 40),
@@ -62,11 +62,11 @@ class _MealListScreenState extends State<MealListScreen> {
                 children: [
                   Text(
                     widget.category.strCategory,
-                    style: TextStyle(color: Colors.black, fontSize: 20),
+                    style: const TextStyle(color: Colors.black, fontSize: 20),
                   ),
                   Expanded(
                     child: ListView(
-                      padding: EdgeInsets.all(24),
+                      padding: const EdgeInsets.all(24),
                       children: [
                         for (final entry in snapshot.data!)
                           MealRow(
