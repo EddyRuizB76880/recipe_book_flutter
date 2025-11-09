@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_book/Widgets/app_bar.dart';
+import 'package:recipe_book/Widgets/cooked_icon.dart';
 import 'package:recipe_book/Widgets/pill.dart';
 import 'package:recipe_book/api_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MealDetailsScreen extends StatefulWidget {
-  const MealDetailsScreen({super.key, this.idMeal = 0});
+  const MealDetailsScreen({super.key, required this.idMeal});
 
   final int idMeal;
 
@@ -22,6 +23,7 @@ class _MealDetailsStateScreen extends State<MealDetailsScreen> {
   bool isLoading = true;
   String title = 'Loading...';
   Widget content = const Center(child: CircularProgressIndicator());
+  List<Widget> appBarActions = [];
 
   _loadMealDetails() async {
     final jsonData = await apiService.getMealById(widget.idMeal);
@@ -30,6 +32,9 @@ class _MealDetailsStateScreen extends State<MealDetailsScreen> {
       isLoading = false;
       mealDetails = jsonData['meals'][0];
       title = mealDetails['strMeal'];
+      appBarActions.add(
+        CookedIcon(idMeal: widget.idMeal, tappable: true,)
+      );
     });
   }
 
@@ -48,7 +53,8 @@ class _MealDetailsStateScreen extends State<MealDetailsScreen> {
         child: Column(
           children: [
             Image.network(
-              mealDetails['strMealThumb'] ?? 'https://cdn-icons-png.freepik.com/512/1046/1046874.png',
+              mealDetails['strMealThumb'] ??
+                  'https://cdn-icons-png.freepik.com/512/1046/1046874.png',
               fit: BoxFit.cover,
               height: 200,
               width: double.infinity,
@@ -65,14 +71,15 @@ class _MealDetailsStateScreen extends State<MealDetailsScreen> {
                 ],
               ),
             ),
-            if (mealDetails['strSource'] != null && mealDetails['strSource'].length > 1)
+            if (mealDetails['strSource'] != null &&
+                mealDetails['strSource'].length > 1)
               Padding(
                 padding: const EdgeInsets.only(bottom: 10.0),
                 child: TextButton(
                   onPressed: () async {
                     await launchUrl(Uri.parse(mealDetails['strSource']));
                   },
-                  child: Pill(text: 'Tap here to see the source.',),
+                  child: Pill(text: 'Tap here to see the source.'),
                 ),
               ),
             Text(
@@ -84,7 +91,8 @@ class _MealDetailsStateScreen extends State<MealDetailsScreen> {
               textAlign: TextAlign.center,
             ),
             for (var index = 1; index <= 20; index++)
-              if (mealDetails['strMeasure$index'] != null && mealDetails['strMeasure$index'].length > 1)
+              if (mealDetails['strMeasure$index'] != null &&
+                  mealDetails['strMeasure$index'].length > 1)
                 Text(
                   '${mealDetails['strMeasure$index']} ${mealDetails['strIngredient$index']}',
                   textAlign: TextAlign.center,
@@ -116,7 +124,7 @@ class _MealDetailsStateScreen extends State<MealDetailsScreen> {
     }
 
     return Scaffold(
-      appBar: RecipeBookAppBar(title: title),
+      appBar: RecipeBookAppBar(title: title, actions: appBarActions,),
       body: SafeArea(child: content),
     );
   }

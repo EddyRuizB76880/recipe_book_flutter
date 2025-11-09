@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recipe_book/Models/meal_row_data.dart';
 import 'package:recipe_book/Screens/meal_details_screen.dart';
+import 'package:recipe_book/State/cooked_meals_cubit.dart';
+import 'package:recipe_book/Widgets/cooked_icon.dart';
 
 class MealRow extends StatelessWidget {
   const MealRow({super.key, required this.mealRowData});
@@ -12,7 +15,11 @@ class MealRow extends StatelessWidget {
       splashColor: Theme.of(context).primaryColor,
       onTap: () {
         print('Meal ${mealRowData.idMeal} was clicked.');
-        Navigator.of(context).push(MaterialPageRoute(builder: (ctx) => MealDetailsScreen(idMeal: mealRowData.idMeal,)));
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (ctx) => MealDetailsScreen(idMeal: mealRowData.idMeal),
+          ),
+        );
       },
       borderRadius: BorderRadius.circular(16),
       child: Container(
@@ -23,23 +30,32 @@ class MealRow extends StatelessWidget {
           alignment: AlignmentGeometry.bottomCenter,
           key: ValueKey(mealRowData.idMeal),
           children: [
-              Image.network(
-                mealRowData.strMealThumb ?? 'https://cdn-icons-png.freepik.com/512/1046/1046874.png',
-                width: double.infinity,
-                height: 150,
-                fit: BoxFit.cover,
-              ),
+            Image.network(
+              mealRowData.strMealThumb ??
+                  'https://cdn-icons-png.freepik.com/512/1046/1046874.png',
+              width: double.infinity,
+              height: 150,
+              fit: BoxFit.cover,
+            ),
             Container(
               decoration: BoxDecoration(color: Color.fromARGB(113, 0, 0, 0)),
               height: 30,
             ),
 
-            Text(
-              textAlign: TextAlign.center,
-              mealRowData.strMeal,
-              style: TextStyle(
-                color: Theme.of(context).scaffoldBackgroundColor,
-              ),
+            Row(
+              children: [
+                CookedIcon(idMeal: mealRowData.idMeal),
+                Expanded(
+                  child: Text(
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    mealRowData.strMeal,
+                    style: TextStyle(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
