@@ -16,7 +16,7 @@ class CookedMealsCubit extends Cubit<List<int>> {
     return state.contains(mealId);
   }
   
-  Icon getChecmarkIcon(int mealId) {
+  Icon getCheckmarkIcon(int mealId) {
     return  isIncluded(mealId)
             ? Icon(Icons.check_box_outlined, color: Colors.white)
             : Icon(Icons.check_box_outline_blank, color: Colors.white);

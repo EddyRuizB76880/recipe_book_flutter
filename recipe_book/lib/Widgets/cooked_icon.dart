@@ -20,7 +20,7 @@ class _CookedIconState extends State<CookedIcon> {
     return BlocBuilder<CookedMealsCubit, List<int>>(
       builder: (context, mealIds) {
         final bool isIncluded = context.read<CookedMealsCubit>().isIncluded(widget.idMeal);
-        final icon = context.read<CookedMealsCubit>().getChecmarkIcon(widget.idMeal);
+        final icon = context.read<CookedMealsCubit>().getCheckmarkIcon(widget.idMeal);
         return widget.tappable ? IconButton(
           onPressed: () {
             String message = '';
