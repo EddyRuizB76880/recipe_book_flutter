@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_book/Models/category.dart';
 import 'package:recipe_book/Models/meal_row_data.dart';
-import 'package:recipe_book/Widgets/app_bar.dart';
+import 'package:recipe_book/Widgets/recipe_book_app_bar.dart';
 
 import 'package:recipe_book/Widgets/meal_row.dart';
 import 'package:recipe_book/api_service.dart';

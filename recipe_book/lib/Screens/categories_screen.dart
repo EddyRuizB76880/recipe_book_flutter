@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_book/Models/category.dart';
-import 'package:recipe_book/Widgets/app_bar.dart';
+import 'package:recipe_book/Widgets/recipe_book_app_bar.dart';
 import 'package:recipe_book/Widgets/category_item.dart';
 import 'package:recipe_book/api_service.dart';
 
@@ -32,53 +32,53 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-          future: categories,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            }
+      future: categories,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
 
-            if (snapshot.hasError) {
-              return Center(child: Text(snapshot.error.toString()));
-            }
+        if (snapshot.hasError) {
+          return Center(child: Text(snapshot.error.toString()));
+        }
 
-            if (snapshot.data!.isEmpty) {
-              return const Center(child: Text('No categories available.'));
-            }
+        if (snapshot.data!.isEmpty) {
+          return const Center(child: Text('No categories available.'));
+        }
 
-            return Scaffold(
-              
-              appBar: const RecipeBookAppBar(),
-              body: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 40),
-                  child: Column(
-                    children: [
-                      const Text(
-                        'Categories',
-                        style: TextStyle(color: Colors.black, fontSize: 20),
-                      ),
-                      Expanded(
-                        child: GridView(
-                          padding:const EdgeInsets.all(24),
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        return Scaffold(
+          appBar: const RecipeBookAppBar(),
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 40),
+              child: Column(
+                children: [
+                  const Text(
+                    'Categories',
+                    style: TextStyle(color: Colors.black, fontSize: 20),
+                  ),
+                  Expanded(
+                    child: GridView(
+                      padding: const EdgeInsets.all(24),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                             childAspectRatio: 3 / 2,
                             crossAxisSpacing: 30,
                             mainAxisSpacing: 30,
                           ),
-                          children: [
-                            for (final category in snapshot.data!)
-                              CategoryItem(category: category),
-                          ],
-                        ),
-                      ),
-                    ],
+                      children: [
+                        for (final category in snapshot.data!)
+                          CategoryItem(category: category),
+                      ],
+                    ),
                   ),
-                ),
+                ],
               ),
-            );
-          },
+            ),
+          ),
         );
+      },
+    );
   }
 }
