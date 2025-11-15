@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_book/Models/meal_row_data.dart';
 import 'package:recipe_book/Widgets/recipe_book_app_bar.dart';
-import 'package:recipe_book/Widgets/cooked_icon.dart';
+import 'package:recipe_book/Widgets/favorite_icon.dart';
 import 'package:recipe_book/Widgets/pill.dart';
 import 'package:recipe_book/api_service.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -33,7 +34,14 @@ class _MealDetailsStateScreen extends State<MealDetailsScreen> {
       mealDetails = jsonData['meals'][0];
       title = mealDetails['strMeal'];
       appBarActions.add(
-        CookedIcon(idMeal: widget.idMeal, tappable: true,)
+        FavoriteIcon(
+          meal: MealRowData(
+            strMeal: title,
+            idMeal: widget.idMeal,
+            strMealThumb: mealDetails['strMealThumb'],
+          ),
+          tappable: true,
+        ),
       );
     });
   }
@@ -108,23 +116,43 @@ class _MealDetailsStateScreen extends State<MealDetailsScreen> {
                 ),
               ),
             ),
-            for (final step in mealDetails['strInstructions'].split("\r\n"))
-              if (step.length > 1)
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Text(
-                    step,
-                    style: TextStyle(),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
+            Text(
+              style: TextStyle(fontSize: 12),
+              'Swipe cards up and down to move between steps',
+            ),
+            ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: 400, maxHeight: 200),
+
+              child: CarouselView(
+                itemExtent: double.infinity,
+                scrollDirection: Axis.vertical,
+                itemSnapping: true,
+                shrinkExtent: 200,
+                children: [
+                  for (final step in mealDetails['strInstructions'].split(
+                    "\r\n",
+                  ))
+                    if (step.length > 1)
+                      Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Text(
+                            step,
+                            style: TextStyle(),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                ],
+              ),
+            ),
           ],
         ),
       );
     }
 
     return Scaffold(
-      appBar: RecipeBookAppBar(title: title, actions: appBarActions,),
+      appBar: RecipeBookAppBar(title: title, actions: appBarActions),
       body: SafeArea(child: content),
     );
   }

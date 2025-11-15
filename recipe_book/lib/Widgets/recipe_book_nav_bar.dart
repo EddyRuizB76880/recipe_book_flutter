@@ -5,7 +5,7 @@ class RecipeBookNavBar extends StatefulWidget {
   RecipeBookNavBar({super.key, required this.index, required this.onDestinationTapped});
 
   int index;
-  Function onDestinationTapped;
+  final Function onDestinationTapped;
 
   @override
   State<RecipeBookNavBar> createState() {
@@ -14,7 +14,7 @@ class RecipeBookNavBar extends StatefulWidget {
 }
 
 class _RecipeBookNavBarState extends State<RecipeBookNavBar>{
-    final List<String> labels = ['Categories', 'My Daily Menu', 'Search Recipe'];
+    final List<String> labels = ['Categories', 'My Favorite Meals', 'Search Recipe'];
     
     @override
     Widget build(BuildContext context) {  
@@ -30,7 +30,7 @@ class _RecipeBookNavBarState extends State<RecipeBookNavBar>{
           label: labels[0],
         ),
         NavigationDestination(
-          icon: Icon(Icons.calendar_month_outlined),
+          icon: Icon(Icons.favorite),
           label: labels[1],
         ),
         NavigationDestination(

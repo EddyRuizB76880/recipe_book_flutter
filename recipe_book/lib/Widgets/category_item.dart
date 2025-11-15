@@ -34,9 +34,9 @@ class CategoryItem extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Expanded(child: Image.network(category!.strCategoryThumb)),
+            Expanded(child: Image.network(category.strCategoryThumb)),
             Text(
-              category!.strCategory,
+              category.strCategory,
               style: TextStyle(
                 color: Theme.of(context).scaffoldBackgroundColor,
               ),

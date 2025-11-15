@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_book/Models/category.dart';
-import 'package:recipe_book/Widgets/recipe_book_app_bar.dart';
 import 'package:recipe_book/Widgets/category_item.dart';
 import 'package:recipe_book/api_service.dart';
 
@@ -48,13 +47,9 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
         return SafeArea(
             child: Padding(
-              padding: const EdgeInsets.only(top: 40),
+              padding: const EdgeInsets.only(top: 20),
               child: Column(
                 children: [
-                  const Text(
-                    'Categories',
-                    style: TextStyle(color: Colors.black, fontSize: 20),
-                  ),
                   Expanded(
                     child: GridView(
                       padding: const EdgeInsets.all(24),

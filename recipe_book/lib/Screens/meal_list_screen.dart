@@ -3,8 +3,6 @@ import 'package:recipe_book/Models/category.dart';
 import 'package:recipe_book/Models/meal_row_data.dart';
 import 'package:recipe_book/Widgets/meal_list.dart';
 import 'package:recipe_book/Widgets/recipe_book_app_bar.dart';
-
-import 'package:recipe_book/Widgets/meal_row.dart';
 import 'package:recipe_book/api_service.dart';
 
 class MealListScreen extends StatefulWidget {
@@ -57,16 +55,12 @@ class _MealListScreenState extends State<MealListScreen> {
         }
         //Todo
         return Scaffold(
-          appBar: const RecipeBookAppBar(),
+          appBar: RecipeBookAppBar(title: widget.category.strCategory,),
           body: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.only(top: 40),
+              padding: const EdgeInsets.only(top: 10),
               child: Column(
                 children: [
-                  Text(
-                    widget.category.strCategory,
-                    style: const TextStyle(color: Colors.black, fontSize: 20),
-                  ),
                   Expanded(child: MealList(meals: snapshot.data!)),
                 ],
               ),

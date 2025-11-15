@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recipe_book/Models/meal_row_data.dart';
 import 'package:recipe_book/Screens/meal_details_screen.dart';
-import 'package:recipe_book/State/cooked_meals_cubit.dart';
-import 'package:recipe_book/Widgets/cooked_icon.dart';
+import 'package:recipe_book/Widgets/favorite_icon.dart';
 
 class MealRow extends StatelessWidget {
   const MealRow({super.key, required this.mealRowData});
@@ -44,7 +42,7 @@ class MealRow extends StatelessWidget {
 
             Row(
               children: [
-                CookedIcon(idMeal: mealRowData.idMeal),
+                FavoriteIcon(meal: mealRowData),
                 Expanded(
                   child: Text(
                     overflow: TextOverflow.ellipsis,
