@@ -10,6 +10,8 @@ class MealRowData {
 
   static List<MealRowData> fromJsonToMealList(Map<String, dynamic> jsonData){
     final List<MealRowData> meals = [];
+   
+    if (jsonData['meals'] == null) return [];
 
     for (final entry in jsonData['meals']) {
       meals.add(

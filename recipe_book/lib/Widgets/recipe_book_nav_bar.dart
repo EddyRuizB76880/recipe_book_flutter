@@ -14,24 +14,28 @@ class RecipeBookNavBar extends StatefulWidget {
 }
 
 class _RecipeBookNavBarState extends State<RecipeBookNavBar>{
-    
+    final List<String> labels = ['Categories', 'My Daily Menu', 'Search Recipe'];
     
     @override
-    Widget build(BuildContext context) {
+    Widget build(BuildContext context) {  
     return NavigationBar(
       onDestinationSelected: (int index) {
-        widget.onDestinationTapped(index);
+        widget.onDestinationTapped(index, labels[index]);
       },
       indicatorColor: Theme.of(context).primaryColor.withAlpha(128),
       selectedIndex: widget.index,
-      destinations: const <Widget>[
+      destinations: <Widget>[
         NavigationDestination(
           icon: Icon(Icons.restaurant),
-          label: 'Categories',
+          label: labels[0],
         ),
         NavigationDestination(
-          icon: Badge(child: Icon(Icons.calendar_month_outlined)),
-          label: 'My daily menu',
+          icon: Icon(Icons.calendar_month_outlined),
+          label: labels[1],
+        ),
+        NavigationDestination(
+          icon:  Icon(Icons.search),
+          label: labels[2],
         ),
       ],
     

@@ -29,7 +29,12 @@ class ApiService {
 
   getMealsByIngredient(){}
 
-  getMealById(int idMeal) async{
+  getMealsBySearch (String search) async {
+    final response = await _dio.get('https://www.themealdb.com/api/json/v1/1/search.php?s=$search');
+    return jsonDecode(response.toString());
+  }
+
+  getMealById(int idMeal) async {
     print(idMeal);
     final response = await _dio.get('https://www.themealdb.com/api/json/v1/1/lookup.php?i=$idMeal');
     return jsonDecode(response.toString());

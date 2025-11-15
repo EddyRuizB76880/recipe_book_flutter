@@ -46,9 +46,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           return const Center(child: Text('No categories available.'));
         }
 
-        return Scaffold(
-          appBar: const RecipeBookAppBar(),
-          body: SafeArea(
+        return SafeArea(
             child: Padding(
               padding: const EdgeInsets.only(top: 40),
               child: Column(
@@ -76,8 +74,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 ],
               ),
             ),
-          ),
-        );
+          );
       },
     );
   }

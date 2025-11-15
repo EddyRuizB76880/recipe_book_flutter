@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_book/Models/category.dart';
 import 'package:recipe_book/Models/meal_row_data.dart';
+import 'package:recipe_book/Widgets/meal_list.dart';
 import 'package:recipe_book/Widgets/recipe_book_app_bar.dart';
 
 import 'package:recipe_book/Widgets/meal_row.dart';
@@ -42,7 +43,9 @@ class _MealListScreenState extends State<MealListScreen> {
       future: meals,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Scaffold(body: Center(child: CircularProgressIndicator()));
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
         }
 
         if (snapshot.hasError) {
@@ -64,21 +67,7 @@ class _MealListScreenState extends State<MealListScreen> {
                     widget.category.strCategory,
                     style: const TextStyle(color: Colors.black, fontSize: 20),
                   ),
-                  Expanded(
-                    child: ListView(
-                      padding: const EdgeInsets.all(24),
-                      children: [
-                        for (final entry in snapshot.data!)
-                          MealRow(
-                            mealRowData: MealRowData(
-                              idMeal: entry.idMeal,
-                              strMeal: entry.strMeal,
-                              strMealThumb: entry.strMealThumb,
-                            ),
-                          ),
-                      ],
-                    ),
-                  ),
+                  Expanded(child: MealList(meals: snapshot.data!)),
                 ],
               ),
             ),
